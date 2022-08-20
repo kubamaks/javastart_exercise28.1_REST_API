@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.2.xsd">
+    <include file="20220721_1_create_table_offer_and_category.xml" relativeToChangelogFile="true"/>
+    <include file="testdata/20220720_1_testdata_add_offfers_and_categories.sql" relativeToChangelogFile="true" />
+
+</databaseChangeLog>
