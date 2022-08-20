@@ -1,0 +1,133 @@
+Treść zadania
+To zadanie posiada bazowe repozytorium, w którym znajduje się warstwa wizualna aplikacji (frontend).
+
+Po uruchomieniu projektu zobaczysz, że funkcjonalności takie jak wyświetlanie listy, czy kategorii nie działają, ponieważ brakuje części serwerowej (backendu) za to odpowiedzialnej.
+
+Poniżej zdefiniowane są kontrakty wymagane dla poszczególnych podstron. Twoim zadaniem jest napisanie aplikacji (model danych, kontrolery, ewentualna dodatkowa logika), która dostarczy dane dla widoków oraz pozwoli dodawać nowe ogłoszenia do serwisu.
+
+Model danych
+Aplikacja posiada jedynie ogłoszenia (offers). Każde ogłoszenie może być przypisane do jednej kategorii (category), ale kategoria może posiadać wiele przypisanych ogłoszeń.
+
+Oferta powinna posiadać pola takie jak:
+
+Id
+Title
+Description
+imgUrl
+price
+category
+Kategoria powinna posiadać pola takie jak:
+
+Id
+Name
+Description
+Strona główna „/”
+Wymagania:
+
+GET: /api/offers -> zwraca listę wszystkich ogłoszeń
+
+Przykładowa odpowiedź:
+
+[
+  {
+    "id": 1,
+    "title": "Telewizor",
+    "description": "Super telewizor o przekątnej 55 cali",
+    "imgUrl": "http://blabla2.jpg",
+    "price": 1299,
+    "category": "Elektronika"
+  },
+  {
+    "id": 2,
+    "title": "Kino domowe",
+    "description": "Wypasione kino domowe firmy Sony, gra tak, że można robić festyn",
+    "imgUrl": "http://blabla3.jpg",
+    "price": 699,
+    "category": "Elektronika"
+  },
+  {
+    "id": 3,
+    "title": "Stół drewniany",
+    "description": "Idealny stół drewniany dla rodziny, 6 krzeseł gratis",
+    "imgUrl": "http://blabla.jpg3",
+    "price": 2699,
+    "category": "Meble"
+  }
+]
+ 
+
+GET: /api/offers/count -> zwraca liczbę ogłoszeń w serwisie
+
+Przykładowa odpowiedź:
+
+3
+Strona wyszukiwania /search.html
+GET: /api/offers?title=param_value -> zwraca listę wszystkich ogłoszeń, których nazwa zawiera wartość param_value. Wielkość liter nie ma znaczenia. W przypadku braku parametru zwracana jest lista wszystkich ogłoszeń.
+
+ 
+
+Przykładowa odpowiedź dla /api/offers?title=tele
+
+ 
+
+[
+  {
+    "id": 1,
+    "title": "Telewizor",
+    "description": "Super telewizor o przekątnej 55 cali",
+    "imgUrl": "http://blabla2.jpg",
+    "price": 1299,
+    "category": "Elektronika"
+  }
+]
+Strona dodawania nowej oferty /add.html
+GET: /api/categories/names – zwraca listę nazw wszystkich dostępnych kategorii
+
+POST: /api/offers – zapisuje przesłaną ofertę.
+
+Ciało żądania będzie obiektem JSON zgodnym z formatem:
+
+{
+  "title": "Telewizor",
+  "description": "Super telewizor o przekątnej 55 cali",
+  "imgUrl": "http://blabla2.jpg",
+  "price": 1299,
+  "category": "Elektronika"
+}
+Strona z listą kategorii /categories.html
+GET: /api/categories – zwraca listę wszystkich kategorii w serwisie.
+
+Przykładowa odpowiedź:
+
+[
+  {
+    "name": "Elektronika",
+    "description": "Bardzo fajne przedmioty",
+    "offers": 24
+  },
+  {
+    "name": "Moto",
+    "description": "Samochody, skutery i ciężarówki",
+    "offers": 33
+  }
+]
+Strona pojedynczej oferty /offer.html
+GET: /api/offers/{id} – zwraca ofertę o wskazanym id
+
+Przykładowa odpowiedź:
+
+{
+  "id": 2,
+  "title": "Kino domowe",
+  "description": "Wypasione kino domowe firmy Sony, gra tak, że można robić festyn",
+  "imgUrl": "http://blabla3.jpg",
+  "price": 699,
+  "category": "Elektronika"
+}
+Inne
+POST: /api/categories -> pozwala dodać nową kategorię przesyłając do niego odpowiedni obiekt JSON
+DELETE: /api/offers/{id}
+
+DELETE: /api/categories/{id}
+
+Działanie powyższych punktów krańcowych przetestuj korzystając z Postmana.
